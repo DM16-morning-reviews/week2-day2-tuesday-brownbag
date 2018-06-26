@@ -3,41 +3,58 @@ import logo from "./bobafett.jpg";
 import "./App.css";
 
 import axios from "axios";
+import People from "./People";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      people: []
+      people: [],
+      userInput: ""
     };
+    this.handleInput = this.handleInput.bind(this);
   }
 
   componentDidMount() {
     axios.get(`https://swapi.co/api/people/?page=1`).then(res => {
       const people = res.data.results;
-      console.log(res.data);
       this.setState({ people });
     });
   }
 
-  render() {
-    const { people } = this.state;
-    let allPeople = people.map((e, i) => {
-      return (
-        <div key={i}>
-          <h2>name: {e.name}</h2>
-          <h4>height: {e.height}</h4>
-          <h4>mass: {e.mass}</h4>
-        </div>
-      );
+  handleInput(val) {
+    this.setState({
+      userInput: val
     });
+  }
+
+  render() {
+    const { people, userInput, addHeight } = this.state;
+    let allPeople = people
+      .filter(e => e.name.includes(userInput))
+      .map((e, i) => {
+        return (
+          <People
+            key={i}
+            className="person"
+            name={e.name}
+            height={e.height}
+            mass={e.mass}
+          />
+        );
+      });
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to my Star Wars App</h1>
         </header>
-        <main>{allPeople}</main>
+        <input
+          placeholder="Search for person"
+          style={{ marginTop: "15px" }}
+          onChange={e => this.handleInput(e.target.value)}
+        />
+        <main className="main-content">{allPeople}</main>
       </div>
     );
   }
