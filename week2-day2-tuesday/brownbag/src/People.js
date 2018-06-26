@@ -9,8 +9,8 @@ class People extends Component {
     };
     this.decreaseHeight = this.decreaseHeight.bind(this);
     this.increaseHeight = this.increaseHeight.bind(this);
-    this.decreaseMass = this.decreaseMass.bind(this);
-    this.increaseMass = this.increaseMass.bind(this);
+    // this.decreaseMass = this.decreaseMass.bind(this);
+    // this.increaseMass = this.increaseMass.bind(this);
   }
 
   decreaseHeight() {
@@ -25,17 +25,17 @@ class People extends Component {
     });
   }
 
-  decreaseMass() {
+  decreaseMass = () => {
     this.setState({
       mass: this.state.mass - 1
     });
-  }
+  };
 
-  increaseMass() {
+  increaseMass = () => {
     this.setState({
       mass: this.state.mass + 1
     });
-  }
+  };
 
   render() {
     const { name, height, mass } = this.props;
