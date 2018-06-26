@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   render() {
-    const { people, userInput, addHeight } = this.state;
+    const { people, userInput } = this.state;
     let allPeople = people
       .filter(e => e.name.includes(userInput))
       .map((e, i) => {

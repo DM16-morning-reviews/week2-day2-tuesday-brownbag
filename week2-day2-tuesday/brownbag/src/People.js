@@ -41,8 +41,6 @@ class People extends Component {
     const { name, height, mass } = this.props;
     const { height: stateHeight, mass: stateMass } = this.state;
 
-    console.log(this.props);
-    console.log(this.state);
     return (
       <div className="person">
         <h2>{name}</h2>
@@ -57,7 +55,7 @@ class People extends Component {
           <button onClick={this.decreaseHeight}>-</button>
           <h4 style={{ margin: "0 8px" }}>
             height:
-            {parseInt(height) + stateHeight}
+            {parseInt(height, 10) + stateHeight}
           </h4>
           <button onClick={this.increaseHeight}>+</button>
         </div>
@@ -73,7 +71,7 @@ class People extends Component {
           <button onClick={this.decreaseMass}>-</button>
           <h4 style={{ margin: "0 8px" }}>
             mass:
-            {parseInt(mass) + stateMass}
+            {parseInt(mass, 10) + stateMass}
           </h4>
           <button onClick={this.increaseMass}>+</button>
         </div>
